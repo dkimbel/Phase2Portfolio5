@@ -1,0 +1,21 @@
+<% if @error_messages %>
+  <% viewable_messages = [] %>
+  <% @error_messages.each do |key, value| %>
+    <% curr_error_message = '' %>
+    <% curr_error_message += key.to_s + ' ' + value[0] %>
+    <% curr_error_message = curr_error_message.split("_").join(" ").capitalize %>
+    <% viewable_messages << curr_error_message %>
+  <% end %>
+  <% viewable_messages.each do |message| %>
+    <span id="error_message"><%= message %></span><br/>
+  <% end %>
+  <br/>
+<% end %>
+
+<form method="post" action="/events">
+  Organizer name: <input type="text" name="organizer_name" value="<%= @field_values[:organizer_name] if @field_values %>"><br/>
+  Organizer email: <input type="text" name="organizer_email" value="<%= @field_values[:organizer_email] if @field_values %>"><br/>
+  Title: <input type="text" name="title" value="<%= @field_values[:title] if @field_values %>"><br/>
+  Date: <input type="date" name="date" value="<%= @field_values[:date] if @field_values %>"><br/>
+  <input type="submit" value="Create Event">
+</form>
